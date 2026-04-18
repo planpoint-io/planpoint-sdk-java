@@ -1,0 +1,14 @@
+
+
+# BatchUpdateUnitsBody
+
+
+## Properties
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**ids** | **List&lt;String&gt;** |  |  |
+|**patchData** | **Map&lt;String, Object&gt;** |  |  |
+
+
+

@@ -1,0 +1,2234 @@
+openapi: 3.0.0
+info:
+  description: REST API for the PlanPoint real estate sales and marketing platform.
+  title: PlanPoint API
+  version: 1.0.0
+servers:
+- url: https://app.planpoint.io
+paths:
+  /api/users/login:
+    post:
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+          description: Login successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      summary: Login
+      tags:
+      - Authentication
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/projects/find:
+    post:
+      description: "Returns the full project document including floors, units, commercial\
+        \ spaces, and collections."
+      operationId: findProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FindProjectBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: Project found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      summary: Find a project by namespace and hostname
+      tags:
+      - Projects
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/projects/mine:
+    get:
+      operationId: getMyProjects
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProjectSummary"
+                type: array
+          description: Projects list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get my projects
+      tags:
+      - Projects
+      x-accepts:
+      - application/json
+  /api/projects/{id}:
+    get:
+      operationId: getProject
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: Project
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get a project by ID
+      tags:
+      - Projects
+      x-accepts:
+      - application/json
+    patch:
+      operationId: updateProject
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProjectBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: Updated project
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Update a project
+      tags:
+      - Projects
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/groups:
+    get:
+      operationId: getGroups
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupsListResponse"
+          description: Groups list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get groups
+      tags:
+      - Groups
+      x-accepts:
+      - application/json
+    post:
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGroupBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+          description: Created group
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Create a group
+      tags:
+      - Groups
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/groups/{id}:
+    get:
+      operationId: getGroup
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+          description: Group
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get a group by ID
+      tags:
+      - Groups
+      x-accepts:
+      - application/json
+    patch:
+      operationId: updateGroup
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateGroupBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+          description: Updated group
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Update a group
+      tags:
+      - Groups
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/floors:
+    get:
+      operationId: getFloors
+      parameters:
+      - explode: true
+        in: query
+        name: pid
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/FloorFull"
+                type: array
+          description: Floors list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get floors for a project
+      tags:
+      - Floors
+      x-accepts:
+      - application/json
+    post:
+      operationId: createFloor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFloorBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FloorFull"
+          description: Created floor
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Create a floor
+      tags:
+      - Floors
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/floors/{id}:
+    get:
+      operationId: getFloor
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FloorFull"
+          description: Floor
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get a floor by ID
+      tags:
+      - Floors
+      x-accepts:
+      - application/json
+    patch:
+      operationId: updateFloor
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFloorBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FloorFull"
+          description: Updated floor
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Update a floor
+      tags:
+      - Floors
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/units:
+    get:
+      operationId: getUnits
+      parameters:
+      - explode: true
+        in: query
+        name: pid
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitsListResponse"
+          description: Units list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get units for a project
+      tags:
+      - Units
+      x-accepts:
+      - application/json
+    patch:
+      operationId: batchUpdateUnits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchUpdateUnitsBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UnitFull"
+                type: array
+          description: Updated units
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Batch update units
+      tags:
+      - Units
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+    post:
+      operationId: createUnit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUnitBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitFull"
+          description: Created unit
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Create a unit
+      tags:
+      - Units
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/units/{id}:
+    delete:
+      operationId: deleteUnit
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unit deleted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Delete a unit
+      tags:
+      - Units
+      x-accepts:
+      - application/json
+    get:
+      operationId: getUnit
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitFull"
+          description: Unit
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get a unit by ID
+      tags:
+      - Units
+      x-accepts:
+      - application/json
+    patch:
+      operationId: updateUnit
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUnitBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitFull"
+          description: Updated unit
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Update a unit
+      tags:
+      - Units
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/leads:
+    get:
+      operationId: getLeads
+      parameters:
+      - explode: true
+        in: query
+        name: pid
+        required: true
+        schema:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Lead"
+                type: array
+          description: Leads list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Method not allowed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal server error
+      security:
+      - bearerAuth: []
+      summary: Get leads for a project
+      tags:
+      - Leads
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    AuthResponse:
+      example:
+        access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        message: Login successful
+      properties:
+        message:
+          example: Login successful
+          type: string
+        access_token:
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          type: string
+      required:
+      - access_token
+      - message
+      type: object
+    ErrorResponse:
+      example:
+        paused: true
+        message: Project not found
+      properties:
+        message:
+          example: Project not found
+          type: string
+        paused:
+          $ref: "#/components/schemas/ErrorResponse_paused"
+      required:
+      - message
+      type: object
+    LoginBody:
+      example:
+        password: secret
+        impersonate: true
+        username: user@example.com
+      properties:
+        username:
+          example: user@example.com
+          format: email
+          type: string
+        password:
+          example: secret
+          type: string
+        impersonate:
+          type: boolean
+      required:
+      - username
+      type: object
+    UnitModel:
+      example:
+        name: name
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        floorplan: https://openapi-generator.tech
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        floorplan:
+          format: uri
+          type: string
+      required:
+      - _id
+      type: object
+    Unit:
+      example:
+        bed: 1.4658129805029452
+        parking: 2.3021358869347655
+        orientation: orientation
+        unitNumber: unitNumber
+        price: 6.027456183070403
+        name: name
+        sqft: 5.637376656633329
+        model: model
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        floor: 64a1f2b3c4d5e6f7a8b9c0d1
+        unitmodels:
+        - name: name
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          floorplan: https://openapi-generator.tech
+        - name: name
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          floorplan: https://openapi-generator.tech
+        bath: 5.962133916683182
+        status: Available
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        unitNumber:
+          type: string
+        status:
+          enum:
+          - Available
+          - OnHold
+          - Sold
+          - Leased
+          - Unavailable
+          type: string
+        price:
+          type: number
+        bed:
+          type: number
+        bath:
+          type: number
+        sqft:
+          type: number
+        model:
+          type: string
+        floor:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        orientation:
+          type: string
+        parking:
+          type: number
+        unitmodels:
+          items:
+            $ref: "#/components/schemas/UnitModel"
+          type: array
+      required:
+      - _id
+      type: object
+    Floor:
+      example:
+        image: https://openapi-generator.tech
+        level: 0.8008281904610115
+        name: name
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        units:
+        - bed: 1.4658129805029452
+          parking: 2.3021358869347655
+          orientation: orientation
+          unitNumber: unitNumber
+          price: 6.027456183070403
+          name: name
+          sqft: 5.637376656633329
+          model: model
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          floor: 64a1f2b3c4d5e6f7a8b9c0d1
+          unitmodels:
+          - name: name
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floorplan: https://openapi-generator.tech
+          - name: name
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floorplan: https://openapi-generator.tech
+          bath: 5.962133916683182
+          status: Available
+        - bed: 1.4658129805029452
+          parking: 2.3021358869347655
+          orientation: orientation
+          unitNumber: unitNumber
+          price: 6.027456183070403
+          name: name
+          sqft: 5.637376656633329
+          model: model
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          floor: 64a1f2b3c4d5e6f7a8b9c0d1
+          unitmodels:
+          - name: name
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floorplan: https://openapi-generator.tech
+          - name: name
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floorplan: https://openapi-generator.tech
+          bath: 5.962133916683182
+          status: Available
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        level:
+          type: number
+        units:
+          items:
+            $ref: "#/components/schemas/Unit"
+          type: array
+        image:
+          format: uri
+          type: string
+      required:
+      - _id
+      type: object
+    CommercialSpace:
+      example:
+        price: 7.061401241503109
+        name: name
+        sqft: 9.301444243932576
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        status: Available
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        status:
+          enum:
+          - Available
+          - OnHold
+          - Sold
+          - Leased
+          - Unavailable
+          type: string
+        price:
+          type: number
+        sqft:
+          type: number
+      required:
+      - _id
+      type: object
+    Collection:
+      example:
+        name: name
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        units:
+        - 64a1f2b3c4d5e6f7a8b9c0d1
+        - 64a1f2b3c4d5e6f7a8b9c0d1
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        units:
+          items:
+            example: 64a1f2b3c4d5e6f7a8b9c0d1
+            pattern: "^[0-9a-fA-F]{24}$"
+            type: string
+          type: array
+      required:
+      - _id
+      type: object
+    Project:
+      example:
+        commercialSpaces:
+        - price: 7.061401241503109
+          name: name
+          sqft: 9.301444243932576
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          status: Available
+        - price: 7.061401241503109
+          name: name
+          sqft: 9.301444243932576
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          status: Available
+        hostName: mysite.com
+        colorSold: colorSold
+        sharePageEnabled: true
+        showPrices: true
+        initialView: List
+        customButtonTxt:
+          de: de
+          en: en
+          fr: fr
+          es: es
+          zh: zh
+        projectLang: English
+        colorAccent: colorAccent
+        floors:
+        - image: https://openapi-generator.tech
+          level: 0.8008281904610115
+          name: name
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          units:
+          - bed: 1.4658129805029452
+            parking: 2.3021358869347655
+            orientation: orientation
+            unitNumber: unitNumber
+            price: 6.027456183070403
+            name: name
+            sqft: 5.637376656633329
+            model: model
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floor: 64a1f2b3c4d5e6f7a8b9c0d1
+            unitmodels:
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            bath: 5.962133916683182
+            status: Available
+          - bed: 1.4658129805029452
+            parking: 2.3021358869347655
+            orientation: orientation
+            unitNumber: unitNumber
+            price: 6.027456183070403
+            name: name
+            sqft: 5.637376656633329
+            model: model
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floor: 64a1f2b3c4d5e6f7a8b9c0d1
+            unitmodels:
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            bath: 5.962133916683182
+            status: Available
+        - image: https://openapi-generator.tech
+          level: 0.8008281904610115
+          name: name
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          units:
+          - bed: 1.4658129805029452
+            parking: 2.3021358869347655
+            orientation: orientation
+            unitNumber: unitNumber
+            price: 6.027456183070403
+            name: name
+            sqft: 5.637376656633329
+            model: model
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floor: 64a1f2b3c4d5e6f7a8b9c0d1
+            unitmodels:
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            bath: 5.962133916683182
+            status: Available
+          - bed: 1.4658129805029452
+            parking: 2.3021358869347655
+            orientation: orientation
+            unitNumber: unitNumber
+            price: 6.027456183070403
+            name: name
+            sqft: 5.637376656633329
+            model: model
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+            floor: 64a1f2b3c4d5e6f7a8b9c0d1
+            unitmodels:
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            - name: name
+              _id: 64a1f2b3c4d5e6f7a8b9c0d1
+              floorplan: https://openapi-generator.tech
+            bath: 5.962133916683182
+            status: Available
+        collections:
+        - name: name
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          units:
+          - 64a1f2b3c4d5e6f7a8b9c0d1
+          - 64a1f2b3c4d5e6f7a8b9c0d1
+        - name: name
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          units:
+          - 64a1f2b3c4d5e6f7a8b9c0d1
+          - 64a1f2b3c4d5e6f7a8b9c0d1
+        websiteURL: https://openapi-generator.tech
+        coverImage: https://openapi-generator.tech
+        logo: https://openapi-generator.tech
+        colorReserved: colorReserved
+        colorBase: colorBase
+        showParking: true
+        colorButton: colorButton
+        styleNavigation: Style 1
+        customDomain: customDomain
+        showAvailability: true
+        hideSold: true
+        name: Parkview Residences
+        namespace: parkview-residences
+        showBathrooms: true
+        showOrientation: true
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        internalURLs:
+          de: de
+          en: en
+          fr: fr
+          es: es
+          zh: zh
+        colorAvailable: colorAvailable
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          example: Parkview Residences
+          type: string
+        namespace:
+          example: parkview-residences
+          type: string
+        hostName:
+          example: mysite.com
+          type: string
+        floors:
+          items:
+            $ref: "#/components/schemas/Floor"
+          type: array
+        commercialSpaces:
+          items:
+            $ref: "#/components/schemas/CommercialSpace"
+          type: array
+        collections:
+          items:
+            $ref: "#/components/schemas/Collection"
+          type: array
+        projectLang:
+          example: English
+          type: string
+        styleNavigation:
+          example: Style 1
+          type: string
+        showPrices:
+          type: boolean
+        showAvailability:
+          type: boolean
+        showBathrooms:
+          type: boolean
+        showParking:
+          type: boolean
+        showOrientation:
+          type: boolean
+        hideSold:
+          type: boolean
+        initialView:
+          example: List
+          type: string
+        logo:
+          format: uri
+          type: string
+        coverImage:
+          format: uri
+          type: string
+        colorBase:
+          type: string
+        colorAccent:
+          type: string
+        colorButton:
+          type: string
+        colorAvailable:
+          type: string
+        colorSold:
+          type: string
+        colorReserved:
+          type: string
+        customButtonTxt:
+          $ref: "#/components/schemas/Project_customButtonTxt"
+        internalURLs:
+          $ref: "#/components/schemas/Project_customButtonTxt"
+        websiteURL:
+          format: uri
+          type: string
+        customDomain:
+          type: string
+        sharePageEnabled:
+          type: boolean
+      required:
+      - _id
+      - hostName
+      - name
+      - namespace
+      type: object
+    FindProjectBody:
+      example:
+        hostName: mysite.com
+        namespace: parkview-residences
+      properties:
+        namespace:
+          example: parkview-residences
+          minLength: 1
+          type: string
+        hostName:
+          example: mysite.com
+          minLength: 1
+          type: string
+      required:
+      - hostName
+      - namespace
+      type: object
+    ProjectSummary:
+      example:
+        hostName: mysite.com
+        createdAt: createdAt
+        paused: true
+        name: Parkview Residences
+        namespace: parkview-residences
+        projectType: projectType
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        status: status
+        statusOverride: statusOverride
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          example: Parkview Residences
+          type: string
+        namespace:
+          example: parkview-residences
+          type: string
+        hostName:
+          example: mysite.com
+          type: string
+        projectType:
+          type: string
+        status:
+          type: string
+        statusOverride:
+          type: string
+        paused:
+          $ref: "#/components/schemas/ErrorResponse_paused"
+        createdAt:
+          type: string
+      required:
+      - _id
+      - name
+      type: object
+    UpdateProjectBody:
+      additionalProperties:
+        nullable: true
+      type: object
+    GroupProject:
+      example:
+        hostName: hostName
+        paused: true
+        name: name
+        namespace: namespace
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        hostName:
+          type: string
+        paused:
+          type: boolean
+      required:
+      - _id
+      - name
+      type: object
+    Group:
+      example:
+        hostName: mysite.com
+        projects:
+        - hostName: hostName
+          paused: true
+          name: name
+          namespace: namespace
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        - hostName: hostName
+          paused: true
+          name: name
+          namespace: namespace
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        isOwner: true
+        propertyType: propertyType
+        name: Downtown Portfolio
+        namespace: downtown-portfolio
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        isAdmin: true
+        type: type
+        user: 64a1f2b3c4d5e6f7a8b9c0d1
+        isEditor: true
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          example: Downtown Portfolio
+          type: string
+        namespace:
+          example: downtown-portfolio
+          type: string
+        hostName:
+          example: mysite.com
+          type: string
+        type:
+          type: string
+        propertyType:
+          type: string
+        user:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        projects:
+          items:
+            $ref: "#/components/schemas/Group_projects_inner"
+          type: array
+        isOwner:
+          type: boolean
+        isAdmin:
+          type: boolean
+        isEditor:
+          type: boolean
+      required:
+      - _id
+      - user
+      type: object
+    GroupsListResponse:
+      example:
+        records:
+        - hostName: mysite.com
+          projects:
+          - hostName: hostName
+            paused: true
+            name: name
+            namespace: namespace
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          - hostName: hostName
+            paused: true
+            name: name
+            namespace: namespace
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          isOwner: true
+          propertyType: propertyType
+          name: Downtown Portfolio
+          namespace: downtown-portfolio
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          isAdmin: true
+          type: type
+          user: 64a1f2b3c4d5e6f7a8b9c0d1
+          isEditor: true
+        - hostName: mysite.com
+          projects:
+          - hostName: hostName
+            paused: true
+            name: name
+            namespace: namespace
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          - hostName: hostName
+            paused: true
+            name: name
+            namespace: namespace
+            _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          isOwner: true
+          propertyType: propertyType
+          name: Downtown Portfolio
+          namespace: downtown-portfolio
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          isAdmin: true
+          type: type
+          user: 64a1f2b3c4d5e6f7a8b9c0d1
+          isEditor: true
+        count: 0.8008281904610115
+      properties:
+        records:
+          items:
+            $ref: "#/components/schemas/Group"
+          type: array
+        count:
+          type: number
+      required:
+      - count
+      - records
+      type: object
+    CreateGroupBody:
+      example:
+        hostName: mysite.com
+        propertyType: propertyType
+        name: Downtown Portfolio
+        namespace: downtown-portfolio
+        type: type
+      properties:
+        name:
+          example: Downtown Portfolio
+          maxLength: 120
+          minLength: 3
+          type: string
+        namespace:
+          example: downtown-portfolio
+          type: string
+        hostName:
+          example: mysite.com
+          type: string
+        type:
+          type: string
+        propertyType:
+          type: string
+      required:
+      - name
+      type: object
+    UpdateGroupBody:
+      additionalProperties:
+        nullable: true
+      type: object
+    FloorFull:
+      example:
+        path: path
+        image: https://openapi-generator.tech
+        level: 0.8008281904610115
+        alternativePaths:
+        - alternativePaths
+        - alternativePaths
+        name: Level 3
+        project: 64a1f2b3c4d5e6f7a8b9c0d1
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        position: 6.027456183070403
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          example: Level 3
+          type: string
+        project:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        level:
+          type: number
+        position:
+          type: number
+        path:
+          type: string
+        alternativePaths:
+          items:
+            type: string
+          type: array
+        image:
+          format: uri
+          type: string
+      required:
+      - _id
+      - project
+      type: object
+    CreateFloorBody:
+      example:
+        path: path
+        alternativePaths:
+        - alternativePaths
+        - alternativePaths
+        name: Level 3
+        project:
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        position: 0.8008281904610115
+      properties:
+        project:
+          $ref: "#/components/schemas/CreateFloorBody_project"
+        name:
+          example: Level 3
+          minLength: 1
+          type: string
+        position:
+          type: number
+        path:
+          type: string
+        alternativePaths:
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - project
+      type: object
+    UpdateFloorBody:
+      additionalProperties:
+        nullable: true
+      type: object
+    UnitFull:
+      example:
+        bed: 6.027456183070403
+        parking: 5.637376656633329
+        orientation: orientation
+        price: 0.8008281904610115
+        name: name
+        unitNumber: unitNumber
+        sqft: 5.962133916683182
+        model: model
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+        floor: 64a1f2b3c4d5e6f7a8b9c0d1
+        bath: 1.4658129805029452
+        status: Available
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        floor:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+        name:
+          type: string
+        unitNumber:
+          type: string
+        status:
+          enum:
+          - Available
+          - OnHold
+          - Sold
+          - Leased
+          - Unavailable
+          type: string
+        price:
+          type: number
+        bed:
+          type: number
+        bath:
+          type: number
+        sqft:
+          type: number
+        model:
+          type: string
+        orientation:
+          type: string
+        parking:
+          type: number
+      required:
+      - _id
+      - floor
+      type: object
+    UnitsListResponse:
+      example:
+        records:
+        - bed: 6.027456183070403
+          parking: 5.637376656633329
+          orientation: orientation
+          price: 0.8008281904610115
+          name: name
+          unitNumber: unitNumber
+          sqft: 5.962133916683182
+          model: model
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          floor: 64a1f2b3c4d5e6f7a8b9c0d1
+          bath: 1.4658129805029452
+          status: Available
+        - bed: 6.027456183070403
+          parking: 5.637376656633329
+          orientation: orientation
+          price: 0.8008281904610115
+          name: name
+          unitNumber: unitNumber
+          sqft: 5.962133916683182
+          model: model
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+          floor: 64a1f2b3c4d5e6f7a8b9c0d1
+          bath: 1.4658129805029452
+          status: Available
+        count: 2.3021358869347655
+      properties:
+        records:
+          items:
+            $ref: "#/components/schemas/UnitFull"
+          type: array
+        count:
+          type: number
+      required:
+      - count
+      - records
+      type: object
+    CreateUnitBody:
+      example:
+        floor:
+          _id: 64a1f2b3c4d5e6f7a8b9c0d1
+      properties:
+        floor:
+          $ref: "#/components/schemas/CreateFloorBody_project"
+      required:
+      - floor
+      type: object
+    BatchUpdateUnitsBody:
+      example:
+        ids:
+        - 64a1f2b3c4d5e6f7a8b9c0d1
+        - 64a1f2b3c4d5e6f7a8b9c0d1
+        patchData:
+          key: ""
+      properties:
+        ids:
+          items:
+            example: 64a1f2b3c4d5e6f7a8b9c0d1
+            pattern: "^[0-9a-fA-F]{24}$"
+            type: string
+          type: array
+        patchData:
+          additionalProperties:
+            nullable: true
+          type: object
+      required:
+      - ids
+      - patchData
+      type: object
+    UpdateUnitBody:
+      additionalProperties:
+        nullable: true
+      type: object
+    Lead:
+      example:
+        createdAt: createdAt
+        unit: unit
+        phone: +1 555 000 1234
+        name: Jane Smith
+        _id: _id
+        message: message
+        email: jane@example.com
+      properties:
+        _id:
+          type: string
+        name:
+          example: Jane Smith
+          type: string
+        email:
+          example: jane@example.com
+          format: email
+          type: string
+        phone:
+          example: +1 555 000 1234
+          type: string
+        message:
+          type: string
+        unit:
+          type: string
+        createdAt:
+          type: string
+      type: object
+    ErrorResponse_paused_anyOf:
+      properties:
+        value:
+          type: boolean
+        reason:
+          type: string
+      required:
+      - value
+      type: object
+    ErrorResponse_paused:
+      anyOf:
+      - type: boolean
+      - $ref: "#/components/schemas/ErrorResponse_paused_anyOf"
+    Project_customButtonTxt:
+      description: Translated string per language code
+      example:
+        de: de
+        en: en
+        fr: fr
+        es: es
+        zh: zh
+      properties:
+        en:
+          type: string
+        fr:
+          type: string
+        de:
+          type: string
+        es:
+          type: string
+        zh:
+          type: string
+      type: object
+    Group_projects_inner:
+      anyOf:
+      - $ref: "#/components/schemas/GroupProject"
+      - example: 64a1f2b3c4d5e6f7a8b9c0d1
+        pattern: "^[0-9a-fA-F]{24}$"
+        type: string
+    CreateFloorBody_project:
+      example:
+        _id: 64a1f2b3c4d5e6f7a8b9c0d1
+      properties:
+        _id:
+          example: 64a1f2b3c4d5e6f7a8b9c0d1
+          pattern: "^[0-9a-fA-F]{24}$"
+          type: string
+      required:
+      - _id
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
