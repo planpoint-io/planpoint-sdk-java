@@ -9,58 +9,36 @@ Official Java SDK for the [PlanPoint](https://app.planpoint.io) API.
 
 ## Installation
 
-The SDK is published to GitHub Packages. Add the repository and dependency to your project:
+The SDK is served via [JitPack](https://jitpack.io) — no auth or registry setup required.
 
 ### Maven
-
-Add to your `pom.xml`:
 
 ```xml
 <repositories>
   <repository>
-    <id>github</id>
-    <url>https://maven.pkg.github.com/planpoint-io/planpoint-sdk-java</url>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
   </repository>
 </repositories>
 
 <dependencies>
   <dependency>
-    <groupId>io.planpoint</groupId>
-    <artifactId>planpoint-sdk</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.github.planpoint-io</groupId>
+    <artifactId>planpoint-sdk-java</artifactId>
+    <version>main-SNAPSHOT</version>
   </dependency>
 </dependencies>
-```
-
-Add to your `~/.m2/settings.xml` (GitHub token with `read:packages` scope required):
-
-```xml
-<settings>
-  <servers>
-    <server>
-      <id>github</id>
-      <username>YOUR_GITHUB_USERNAME</username>
-      <password>YOUR_GITHUB_TOKEN</password>
-    </server>
-  </servers>
-</settings>
 ```
 
 ### Gradle
 
 ```groovy
 repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/planpoint-io/planpoint-sdk-java")
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
-        }
-    }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'io.planpoint:planpoint-sdk:1.0.0'
+    implementation 'com.github.planpoint-io:planpoint-sdk-java:main-SNAPSHOT'
 }
 ```
 

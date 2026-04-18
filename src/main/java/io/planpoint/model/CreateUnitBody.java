@@ -36,7 +36,7 @@ import io.planpoint.ApiClient;
 @JsonPropertyOrder({
   CreateUnitBody.JSON_PROPERTY_FLOOR
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T18:57:29.273682275Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T19:26:38.222016651Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class CreateUnitBody {
   public static final String JSON_PROPERTY_FLOOR = "floor";
   @javax.annotation.Nonnull

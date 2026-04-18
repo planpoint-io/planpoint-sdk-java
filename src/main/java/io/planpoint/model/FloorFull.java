@@ -46,7 +46,7 @@ import io.planpoint.ApiClient;
   FloorFull.JSON_PROPERTY_ALTERNATIVE_PATHS,
   FloorFull.JSON_PROPERTY_IMAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T18:57:29.273682275Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T19:26:38.222016651Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class FloorFull {
   public static final String JSON_PROPERTY_ID = "_id";
   @javax.annotation.Nonnull

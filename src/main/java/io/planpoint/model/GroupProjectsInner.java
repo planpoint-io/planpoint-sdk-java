@@ -50,7 +50,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import io.planpoint.ApiClient;
 import io.planpoint.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T18:57:29.273682275Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T19:26:38.222016651Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 @JsonDeserialize(using=GroupProjectsInner.GroupProjectsInnerDeserializer.class)
 @JsonSerialize(using = GroupProjectsInner.GroupProjectsInnerSerializer.class)
 public class GroupProjectsInner extends AbstractOpenApiSchema {
