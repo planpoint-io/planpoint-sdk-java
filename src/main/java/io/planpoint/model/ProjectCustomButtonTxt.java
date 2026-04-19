@@ -39,7 +39,7 @@ import io.planpoint.ApiClient;
   ProjectCustomButtonTxt.JSON_PROPERTY_ES,
   ProjectCustomButtonTxt.JSON_PROPERTY_ZH
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T19:26:38.222016651Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-19T00:24:16.587565120Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class ProjectCustomButtonTxt {
   public static final String JSON_PROPERTY_EN = "en";
   @javax.annotation.Nullable

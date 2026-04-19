@@ -4,8 +4,15 @@ Official Java SDK for the [PlanPoint](https://app.planpoint.io) API.
 
 ## Requirements
 
-- Java 8+
+- Java 17+
 - Maven or Gradle
+
+> **Windows Note:** Make sure `JAVA_HOME` is set before running Maven:
+>
+> ```powershell
+> $env:JAVA_HOME = "C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot"
+> $env:Path += ";$env:JAVA_HOME\bin"
+> ```
 
 ## Installation
 
@@ -28,6 +35,19 @@ The SDK is served via [JitPack](https://jitpack.io) — no auth or registry setu
     <version>main-SNAPSHOT</version>
   </dependency>
 </dependencies>
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.1.0</version>
+      <configuration>
+        <mainClass>com.yourpackage.Main</mainClass>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 ```
 
 ### Gradle

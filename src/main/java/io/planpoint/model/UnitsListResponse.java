@@ -40,7 +40,7 @@ import io.planpoint.ApiClient;
   UnitsListResponse.JSON_PROPERTY_RECORDS,
   UnitsListResponse.JSON_PROPERTY_COUNT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-18T19:26:38.222016651Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-19T00:24:16.587565120Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class UnitsListResponse {
   public static final String JSON_PROPERTY_RECORDS = "records";
   @javax.annotation.Nonnull
