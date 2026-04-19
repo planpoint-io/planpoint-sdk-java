@@ -310,6 +310,7 @@ List all leads for a project. Requires auth.
 ## Links
 
 - [PlanPoint App](https://app.planpoint.io)
+- [Java SDK on GitHub](https://github.com/planpoint-io/planpoint-sdk-java)
 - [npm TypeScript SDK](https://www.npmjs.com/package/@planpoint/sdk)
 - [PyPI Python SDK](https://pypi.org/project/planpoint-sdk)
 - [Go SDK](https://github.com/planpoint-io/planpoint-sdk-go)

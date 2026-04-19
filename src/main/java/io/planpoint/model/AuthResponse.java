@@ -36,7 +36,7 @@ import io.planpoint.ApiClient;
   AuthResponse.JSON_PROPERTY_MESSAGE,
   AuthResponse.JSON_PROPERTY_ACCESS_TOKEN
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-19T00:24:16.587565120Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-19T01:19:02.320599251Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class AuthResponse {
   public static final String JSON_PROPERTY_MESSAGE = "message";
   @javax.annotation.Nonnull
