@@ -48,7 +48,7 @@ import io.planpoint.ApiClient;
   Group.JSON_PROPERTY_IS_ADMIN,
   Group.JSON_PROPERTY_IS_EDITOR
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-19T01:19:02.320599251Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-20T18:35:06.498112497Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class Group {
   public static final String JSON_PROPERTY_ID = "_id";
   @javax.annotation.Nonnull

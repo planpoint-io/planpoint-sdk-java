@@ -39,7 +39,7 @@ import io.planpoint.ApiClient;
   CreateGroupBody.JSON_PROPERTY_TYPE,
   CreateGroupBody.JSON_PROPERTY_PROPERTY_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-19T01:19:02.320599251Z[Etc/UTC]", comments = "Generator version: 7.21.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-20T18:35:06.498112497Z[Etc/UTC]", comments = "Generator version: 7.21.0")
 public class CreateGroupBody {
   public static final String JSON_PROPERTY_NAME = "name";
   @javax.annotation.Nonnull

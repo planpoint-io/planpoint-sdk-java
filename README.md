@@ -1,6 +1,6 @@
 # planpoint-sdk-java
 
-Official Java SDK for the [PlanPoint](https://app.planpoint.io) API.
+Official Java SDK for the [Planpoint](https://app.planpoint.io) API.
 
 ## Requirements
 
@@ -309,9 +309,10 @@ List all leads for a project. Requires auth.
 
 ## Links
 
-- [PlanPoint App](https://app.planpoint.io)
+- **[Install via JitPack (Maven/Gradle)](https://jitpack.io/#planpoint-io/planpoint-sdk-java)**
 - [Java SDK on GitHub](https://github.com/planpoint-io/planpoint-sdk-java)
-- [npm TypeScript SDK](https://www.npmjs.com/package/@planpoint/sdk)
-- [PyPI Python SDK](https://pypi.org/project/planpoint-sdk)
-- [Go SDK](https://github.com/planpoint-io/planpoint-sdk-go)
-- [PHP SDK](https://github.com/planpoint-io/planpoint-sdk-php)
+- [Planpoint App](https://app.planpoint.io)
+- [TypeScript SDK on npm](https://www.npmjs.com/package/@planpoint/sdk)
+- [Python SDK on PyPI](https://pypi.org/project/planpoint-sdk)
+- [Go SDK on GitHub](https://github.com/planpoint-io/planpoint-sdk-go)
+- [PHP SDK on GitHub](https://github.com/planpoint-io/planpoint-sdk-php)
